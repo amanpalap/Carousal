@@ -23,7 +23,7 @@ const Carousel = () => {
           <div
             key={index}
             className={clsx(
-              'relative h-full transition-all duration-300 ease-in-out',
+              'relative h-full transition-all cursor-pointer duration-300 ease-in-out',
               activeIndex === index
                 ? 'flex-[3]'
                 : activeIndex !== null
