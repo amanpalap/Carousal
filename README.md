@@ -21,7 +21,7 @@ A responsive carousel component built with React, Next.js, and Tailwind CSS, fea
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/amanpal/hover-expand-carousel.git
+   git clone https://github.com/amanpal/hover-expand-carousel.git](https://github.com/amanpalap/Carousal.git
    ```
 
 2. Navigate to the project directory:
