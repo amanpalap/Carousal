@@ -128,9 +128,5 @@ const Carousel = () => {
 export default Carousel;
 ```
 
-## Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+##You are free to use it anywhere
 
