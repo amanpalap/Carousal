@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hover Expand Carousel
 
-## Getting Started
+A responsive carousel component built with React, Next.js, and Tailwind CSS, featuring hover effects where the active image expands while others shrink. The carousel also includes labels and icons displayed on hover.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Hover Effects**: Expand the hovered image and shrink others.
+- **Responsive Design**: Adjusts to various screen sizes.
+- **Customizable Labels**: Display labels dynamically for each image.
+- **Icons**: Includes an arrow icon alongside the label when an image is active.
+
+## Demo
+![Demo GIF](demo.gif)
+
+## Installation
+
+### Prerequisites
+- Node.js installed on your system.
+- A Next.js 14 project setup.
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/hover-expand-carousel.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd hover-expand-carousel
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and visit `http://localhost:3000` to see the carousel in action.
+
+## Usage
+
+### File Structure
+- **Carousel Component**: `components/Carousel.tsx`
+- **Assets**: Place images in the public directory (e.g., `/public/1.jpg`).
+
+### Adding Images
+Update the `images` array in the `Carousel` component to add your custom images and labels:
+```javascript
+const images = [
+  { src: '/1.jpg', alt: 'Image 1', label: 'STRENGTH' },
+  { src: '/2.jpg', alt: 'Image 2', label: 'MOBILITY' },
+  { src: '/3.jpg', alt: 'Image 3', label: 'DRILLS' },
+];
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
+- **React**
+- **Next.js**
+- **Tailwind CSS**
+- **React Icons** (IoIosArrowDroprightCircle)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Styling
+Styling is handled using Tailwind CSS. Customize styles directly in the JSX or through your Tailwind configuration.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Example Code
+Here is the core code for the carousel:
 
-## Learn More
+```javascript
+'use client';
 
-To learn more about Next.js, take a look at the following resources:
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { IoIosArrowDroprightCircle } from 'react-icons/io';
+import clsx from 'clsx';
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+const Carousel = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  const images = [
+    { src: '/1.jpg', alt: 'Image 1', label: 'STRENGTH' },
+    { src: '/2.jpg', alt: 'Image 2', label: 'MOBILITY' },
+    { src: '/3.jpg', alt: 'Image 3', label: 'DRILLS' },
+  ];
 
-## Deploy on Vercel
+  return (
+    <div className='w-full items-center justify-center flex min-h-screen px-36'>
+      <div className="flex justify-center rounded-3xl overflow-hidden items-center h-96 w-full">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={clsx(
+              'relative h-full transition-all duration-300 ease-in-out',
+              activeIndex === index
+                ? 'flex-[3]'
+                : activeIndex !== null
+                  ? 'flex-[1]'
+                  : 'flex-1'
+            )}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            {activeIndex === index && (
+              <div className='relative py-2 px-2 flex flex-wrap items-center justify-between w-full z-20'>
+                <div className="text-xl text-white px-2 py-1 rounded">
+                  {image.label}
+                </div>
+                <IoIosArrowDroprightCircle className='text-white w-7 h-7 mr-9' />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+export default Carousel;
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
